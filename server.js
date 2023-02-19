@@ -17,11 +17,18 @@ app.use("/", Router);
 
 const USERNAME = process.env.DB_USERNAME;
 const PASSWORD = process.env.DB_PASSWORD;
+const URL =
+  process.env.MONGODB_URI ||
+  `mongodb+srv://${USERNAME}:${PASSWORD}@ecommerce.hpulrzn.mongodb.net/?retryWrites=true&w=majority`;
 
-Connection(USERNAME, PASSWORD);
+Connection(URL);
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
 
 app.listen(PORT, () => {
-  console.log(`Server running on PORT http://:${PORT}`);
+  console.log(`Server running on PORT http:localhost//:${PORT}`);
 });
 
 DefaultData();

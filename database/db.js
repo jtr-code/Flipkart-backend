@@ -2,8 +2,7 @@ import mongoose from "mongoose";
 
 mongoose.set("strictQuery", true);
 
-export const Connection = async (username, password) => {
-  const URL = `mongodb+srv://${username}:${password}@ecommerce.hpulrzn.mongodb.net/?retryWrites=true&w=majority`;
+export const Connection = async (URL) => {
   try {
     await mongoose.connect(URL, {
       useNewUrlParser: true,
